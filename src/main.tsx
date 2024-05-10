@@ -5,6 +5,7 @@ import './index.css'
 import { ThemeContextProvider } from './context/ThemeContext.tsx'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Home from './components/Home/index.tsx'
+import { CountriesContextProvider } from './context/CountriesContext.tsx'
 
 
 const router = createBrowserRouter(
@@ -19,7 +20,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeContextProvider>
-      <RouterProvider router={router} />
+      <CountriesContextProvider>
+        <RouterProvider router={router} />
+      </CountriesContextProvider>
     </ThemeContextProvider>
   </React.StrictMode>,
 )
