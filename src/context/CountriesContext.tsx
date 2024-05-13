@@ -1,26 +1,12 @@
 import { useContext, createContext, useEffect, useState } from "react"
 import { fetchAllCountriesData } from "@/api"
+import { type Country } from "@/lib/types"
 
-
-type Country = {
-  name: {
-    common: string,
-    official: string
-  },
-  population: number,
-  region: string,
-  capital: string[],
-  subregion: string,
-  maps: { googleMaps: string }
-  continents: string[],
-  // languages: {  }
-  // currencies: { EUR: { name: string, symbol: string } }
-  flags: { svg: string, alt: string }
-  coatOfArms: { svg: string }
-}
 
 type CountriesContextType = {
   countries: Country[] | null
+  countrySearch: string,
+  setCountrySearch: React.Dispatch<React.SetStateAction<string>>
 }
 
 const CountriesContext = createContext<CountriesContextType | null>(null)
@@ -32,6 +18,7 @@ export const useCountries = () => {
 export const CountriesContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [countries, setCountries] = useState<Country[] | null>(null)
+  const [countrySearch, setCountrySearch] = useState('')
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -47,7 +34,7 @@ export const CountriesContextProvider = ({ children }: { children: React.ReactNo
   }, [])
 
   return (
-    <CountriesContext.Provider value={{ countries }}>
+    <CountriesContext.Provider value={{ countries, countrySearch, setCountrySearch }}>
       {children}
     </CountriesContext.Provider>
   )
