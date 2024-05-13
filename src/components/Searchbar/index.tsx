@@ -21,15 +21,19 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Search } from "lucide-react";
+import { useCountries } from "@/context/CountriesContext";
 
 
 const FormSchema = z.object({
   countryName: z
-    .string({ required_error: "Please enter a country name" })
+    .string()
+    .min(2, { message: "Please enter at least 2 characters" })
     .toLowerCase()
 })
 
 const SearchBar = () => {
+
+  const { setCountrySearch } = useCountries()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -39,26 +43,33 @@ const SearchBar = () => {
   })
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    setCountrySearch(data.countryName)
     console.log(data)
   }
 
+  const handleCountrySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCountrySearch(event.target.value)
+    console.log(event.target.value)
+  }
+
   return (
-    <section className="flex justify-between items-center">
+    <section className="flex justify-between items-center gap-4">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex border">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex">
           <FormField
             control={form.control}
             name="countryName"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="flex items-center h-fit border-none w-[20rem] gap-2 pl-4">
+                  <div className="flex items-center h-fit w-[13rem] md:w-[20rem] gap-2 pl-4 border">
                     <Search strokeWidth={2} size={22} className="text-gray-400 " />
                     <Input
+                      {...field}
                       placeholder="Search for a country..."
                       className="border-0 rounded-md placeholder:text-sm sm:placeholder:text-md placeholder:text-gray-400 placeholder:font-normal"
                       autoComplete="off"
-                      {...field}
+                    // onChange={handleCountrySearch}
                     />
                   </div>
                 </FormControl>
@@ -71,7 +82,7 @@ const SearchBar = () => {
       </Form>
 
       <Select >
-        <SelectTrigger className="w-[12rem] font-medium text-xs">
+        <SelectTrigger className="w-[8rem] md:w-[12rem] font-medium text-xs">
           <SelectValue placeholder="Filter by Region" />
         </SelectTrigger>
         <SelectContent>
