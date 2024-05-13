@@ -23,8 +23,8 @@ const Navbar = () => {
         </Button>
         <Button onClick={handleChangeTheme} className="bg-transparent" >
           {darkMode ?
-            <MoonStar size={20} /> :
-            <Sun size={20} />
+            <Sun size={20} /> :
+            <MoonStar size={20} />
           }
         </Button>
       </nav>
