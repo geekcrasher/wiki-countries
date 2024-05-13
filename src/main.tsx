@@ -6,13 +6,14 @@ import { ThemeContextProvider } from './context/ThemeContext.tsx'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Home from './components/Home/index.tsx'
 import { CountriesContextProvider } from './context/CountriesContext.tsx'
+import Country from './pages/Country/index.tsx'
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index path='/' element={<Home />} />
-      <Route path='country/:name' element={<></>} />
+      <Route path='country/:name' element={<Country />} />
     </Route>
   )
 )
