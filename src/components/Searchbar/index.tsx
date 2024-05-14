@@ -6,10 +6,8 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -87,7 +85,7 @@ const SearchBar = () => {
         </SelectTrigger>
         <SelectContent>
           {regions.map(region => (
-            <SelectItem value={`${region.value}`}>{region.label}</SelectItem>
+            <SelectItem key={region.value} value={`${region.value}`}>{region.label}</SelectItem>
           ))}
         </SelectContent>
       </Select>
