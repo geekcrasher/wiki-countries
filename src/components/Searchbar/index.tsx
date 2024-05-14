@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select"
 import { Search } from "lucide-react";
 import { useCountries } from "@/context/CountriesContext";
+import { regions } from "./region";
 
 
 const FormSchema = z.object({
@@ -53,23 +54,22 @@ const SearchBar = () => {
   }
 
   return (
-    <section className="flex justify-between items-center gap-4">
+    <section className="sm:flex justify-between items-center gap-4">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="">
           <FormField
             control={form.control}
             name="countryName"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="flex items-center h-fit w-[13rem] md:w-[20rem] gap-2 pl-4 border">
-                    <Search strokeWidth={2} size={22} className="text-gray-400 " />
+                  <div className="flex items-center h-fit gap-2 w-full sm:w-[20rem] pl-4 border dark:border-0 bg-white dark:bg-[#2b3945]">
+                    <Search strokeWidth={2} size={18} className="text-gray-400 " />
                     <Input
                       {...field}
                       placeholder="Search for a country..."
-                      className="border-0 rounded-md placeholder:text-sm sm:placeholder:text-md placeholder:text-gray-400 placeholder:font-normal"
+                      className=" border-0 rounded-md placeholder:text-sm sm:placeholder:text-md dark:text-slate-50 placeholder:text-gray-400 placeholder:font-normal"
                       autoComplete="off"
-                    // onChange={handleCountrySearch}
                     />
                   </div>
                 </FormControl>
@@ -82,15 +82,13 @@ const SearchBar = () => {
       </Form>
 
       <Select >
-        <SelectTrigger className="w-[8rem] md:w-[12rem] font-medium text-xs">
+        <SelectTrigger className="mt-8 sm:mt-0 w-[9rem] sm:w-[12rem] dark:text-slate-50 sm:font-medium text-xs shadow-sm">
           <SelectValue placeholder="Filter by Region" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="africa">Africa</SelectItem>
-          <SelectItem value="america">America</SelectItem>
-          <SelectItem value="asia">Asia</SelectItem>
-          <SelectItem value="europe">Europe</SelectItem>
-          <SelectItem value="oceania">Oceania</SelectItem>
+          {regions.map(region => (
+            <SelectItem value={`${region.value}`}>{region.label}</SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </section>
