@@ -36,3 +36,21 @@ export const fetchSingleCountryData = async (countryName: string) => {
     }
   }
 }
+
+// @ function for retrieving the data for a specific country.
+export const fetchCountryCode = async (borderName?: string[]) => {
+  try {
+    const response = await axios.get(`https://restcountries.com/v3.1/alpha?codes=${borderName.join(',')}`, {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    })
+    return response?.data
+  } catch (error: unknown) {
+
+    if (error instanceof AxiosError) {
+      console.log(`Error fetching data for "${borderName}":`, error.message)
+      throw error
+    }
+  }
+}
