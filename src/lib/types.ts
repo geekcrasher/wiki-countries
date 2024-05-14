@@ -27,5 +27,6 @@ export type Country = {
   currencies: { [key: string]: Currency }
   flags: Flag
   coatOfArms: { svg: string }
+  borders?: string[]
   tld: string[]
 }
