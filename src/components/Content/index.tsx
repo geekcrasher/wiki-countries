@@ -15,14 +15,13 @@ const Content = React.memo(() => {
   const { countries, countrySearch, region } = useCountries()
 
   const filteredCountry = countries?.filter(country => {
-    const searchCountry = country.name.common.toLowerCase().includes(countrySearch.toLowerCase());
-    const searchRegion = country.region.toLowerCase() === region
-
-    if (region === 'all') {
+    if (countrySearch) {
+      return country.name.common.toLowerCase().includes(countrySearch.toLowerCase());
+    } else if (region !== 'all') {
+      return country.region.toLowerCase() === region
+    } else {
       return country
     }
-
-    return searchCountry && searchRegion
   })
 
   return (
