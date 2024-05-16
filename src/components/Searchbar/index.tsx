@@ -8,7 +8,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import {
@@ -22,7 +21,6 @@ import { Search } from "lucide-react";
 import { useCountries } from "@/context/CountriesContext";
 import { regions } from "./region";
 
-
 const FormSchema = z.object({
   countryName: z
     .string()
@@ -32,7 +30,7 @@ const FormSchema = z.object({
 
 const SearchBar = () => {
 
-  const { setCountrySearch } = useCountries()
+  const { setCountrySearch, setRegion } = useCountries()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -42,13 +40,19 @@ const SearchBar = () => {
   })
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    setCountrySearch(data.countryName)
-    console.log(data)
+    try {
+      setCountrySearch(data.countryName)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleCountrySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCountrySearch(event.target.value)
-    console.log(event.target.value)
+  }
+
+  const handleRegionChange = (value: string) => {
+    setRegion(value);
   }
 
   return (
@@ -64,14 +68,15 @@ const SearchBar = () => {
                   <div className="flex items-center h-fit gap-2 w-full sm:w-[20rem] pl-4 border dark:border-0 bg-white dark:bg-[#2b3945]">
                     <Search strokeWidth={2} size={18} className="text-gray-400 " />
                     <Input
-                      {...field}
+                      // {...field}
                       placeholder="Search for a country..."
                       className=" border-0 rounded-md placeholder:text-sm sm:placeholder:text-md dark:text-slate-50 placeholder:text-gray-400 placeholder:font-normal"
                       autoComplete="off"
+                      onChange={handleCountrySearch}
                     />
                   </div>
                 </FormControl>
-                <FormMessage />
+                {/* <FormMessage /> */}
               </FormItem>
             )}
           />
@@ -79,7 +84,7 @@ const SearchBar = () => {
         </form>
       </Form>
 
-      <Select >
+      <Select onValueChange={handleRegionChange}>
         <SelectTrigger className="mt-8 sm:mt-0 w-[9rem] sm:w-[12rem] dark:text-slate-50 sm:font-medium text-xs shadow-sm">
           <SelectValue placeholder="Filter by Region" />
         </SelectTrigger>
