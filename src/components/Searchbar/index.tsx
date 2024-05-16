@@ -48,7 +48,7 @@ const SearchBar = () => {
   }
 
   const handleCountrySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCountrySearch(event.target.value)
+    setCountrySearch(event.currentTarget.value)
   }
 
   const handleRegionChange = (value: string) => {
@@ -62,7 +62,8 @@ const SearchBar = () => {
           <FormField
             control={form.control}
             name="countryName"
-            render={({ field }) => (
+            // { field }
+            render={() => (
               <FormItem>
                 <FormControl>
                   <div className="flex items-center h-fit gap-2 w-full sm:w-[20rem] pl-4 border dark:border-0 bg-white dark:bg-[#2b3945]">
