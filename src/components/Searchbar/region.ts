@@ -5,12 +5,16 @@ type RegionType = {
 
 export const regions: RegionType[] = [
   {
+    label: 'All',
+    value: 'all'
+  },
+  {
     label: 'Africa',
     value: 'africa'
   },
   {
     label: 'America',
-    value: 'america'
+    value: 'americas'
   }, {
     label: 'Asia',
     value: 'asia'
