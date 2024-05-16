@@ -54,7 +54,7 @@ const CountryDetails = () => {
           />
         </section>
         <article className="flex flex-col mt-16 2xl:ml-14 md:mt-24 2xl:mt-0 dark:text-slate-50">
-          <h1 className="text-xl md:text-3xl font-bold font-inter">{selectedCountry?.name.common}</h1>
+          <h1 className="text-xl md:text-3xl font-bold">{selectedCountry?.name.common}</h1>
           <section className="md:flex gap-24 mt-8 text-[0.925rem]">
             <section className="space-y-2">
               <Paragraph label="Official Name" countryInfo={selectedCountry?.name.official} />
