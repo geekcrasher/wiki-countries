@@ -48,7 +48,7 @@ const SearchBar = () => {
   }
 
   const handleCountrySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCountrySearch(event.currentTarget.value)
+    setCountrySearch(event.target.value)
   }
 
   const handleRegionChange = (value: string) => {
