@@ -6,9 +6,11 @@ import { type Country } from "@/lib/types"
 type CountriesContextType = {
   countries: Country[] | null
   countrySearch: string
-  region: string
+  region: string,
+  length: number
   setCountrySearch: React.Dispatch<React.SetStateAction<string>>
   setRegion: React.Dispatch<React.SetStateAction<string>>
+  setLength: React.Dispatch<React.SetStateAction<number>>
 }
 
 const CountriesContext = createContext<CountriesContextType | null>(null)
@@ -22,6 +24,7 @@ export const CountriesContextProvider = ({ children }: { children: React.ReactNo
   const [countries, setCountries] = useState<Country[] | null>(null)
   const [countrySearch, setCountrySearch] = useState('')
   const [region, setRegion] = useState('all')
+  const [length, setLength] = useState(0)
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -37,7 +40,7 @@ export const CountriesContextProvider = ({ children }: { children: React.ReactNo
   }, [])
 
   return (
-    <CountriesContext.Provider value={{ countries, countrySearch, setCountrySearch, region, setRegion }}>
+    <CountriesContext.Provider value={{ countries, countrySearch, setCountrySearch, region, setRegion, length, setLength }}>
       {children}
     </CountriesContext.Provider>
   )
