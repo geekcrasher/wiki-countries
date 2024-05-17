@@ -12,7 +12,7 @@ import { Paragraph } from "@/components/shared/Paragraph";
 
 const Content = React.memo(() => {
 
-  const { countries, countrySearch, region } = useCountries()
+  const { countries, countrySearch, region, setLength } = useCountries()
 
   const filteredCountry = countries?.filter(country => {
     if (countrySearch) {
@@ -24,9 +24,12 @@ const Content = React.memo(() => {
     }
   })
 
+  if (filteredCountry) setLength(filteredCountry.length)
+
+
   return (
     <>
-      {filteredCountry?.map(country => {
+      {filteredCountry && filteredCountry?.length > 0 && filteredCountry?.map(country => {
         return (
           <Link to={`/country/${country.name.common}`} key={country.name.common} className="shadow-md overflow-hidden rounded-lg">
             <Card className="h-[20rem] md:h-[22rem] p-0 border-0 overflow-hidden">
