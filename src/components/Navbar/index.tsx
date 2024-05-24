@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
 
-  const { darkMode, handleChangeTheme } = useTheme()
+  const { theme, handleChangeTheme } = useTheme()
 
   const navigate = useNavigate()
 
@@ -22,7 +22,7 @@ const Navbar = () => {
           Wiki Countries
         </Button>
         <Button onClick={handleChangeTheme} className="bg-transparent" >
-          {darkMode ?
+          {theme === 'dark' ?
             <Sun size={20} /> :
             <MoonStar size={20} />
           }
